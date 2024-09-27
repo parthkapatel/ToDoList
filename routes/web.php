@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login_form');
+Route::post('/login', [LoginController::class, 'login'])->name("login");
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register_form');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware("auth")->group(function (){
+    Route::get('/{any}', function () {
+        return view('main');
+    })->where('any', '.*');
+    Route::get('/', function () {
+        return view('main');
+    })->name('main');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('tasks', TaskController::class);
 });

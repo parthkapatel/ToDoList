@@ -1,0 +1,6 @@
+@import "toastr";
+
+.loader {
+    border-left-color: transparent;
+    border-right-color: transparent;
+}

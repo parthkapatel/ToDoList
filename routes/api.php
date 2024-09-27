@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user',function (Request $request){
+        return $request->user();
+    });
+    Route::apiResource('tasks', TaskController::class);
+    Route::as("tasks.")->prefix("tasks")->group(function (){
+       Route::post('/{id}/updateTaskStatus/',[TaskController::class,'updateStatus'])->name('updateTaskStatus');
+    });
+    Route::apiResource('categories', CategoryController::class);
 });
