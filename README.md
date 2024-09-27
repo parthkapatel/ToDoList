@@ -29,10 +29,10 @@ This is a To-Do Task Application built using Laravel and Vue.js. The application
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/todo-app.git
+   git clone https://github.com/parthkapatel/ToDoList.git
 2. Navigate to the project directory:
     ```bash
-   cd todo-app
+   cd ToDoList
 3. Install PHP Dependencies
    ```bash
    composer install
